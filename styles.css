@@ -1,0 +1,39 @@
+ss)
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    margin-top: 20px;
+}
+.title {
+    font-size: 24px;
+    font-weight: bold;
+}
+.parking-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.parking-spot {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+.available {
+    background-color: green;
+}
+.occupied {
+    background-color: red;
+}
