@@ -12,22 +12,26 @@
         <div id="parking-area" class="parking-area"></div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function fetchParkingData() {
-            $.get('fetch_parking.php', function(data) {
-                let spots = JSON.parse(data);
-                let parkingArea = $('#parking-area');
-                parkingArea.empty();
-                
-                spots.forEach(spot => {
-                    let spotElement = `<div class='parking-spot ${spot.status}' data-id='${spot.spot_id}'>${spot.spot_number}</div>`;
-                    parkingArea.append(spotElement);
-                });
-            });
+            fetch('fetch_parking.php')
+                .then(response => response.json())
+                .then(spots => {
+                    let parkingArea = document.getElementById('parking-area');
+                    parkingArea.innerHTML = '';
+                    
+                    spots.forEach(spot => {
+                        let spotElement = document.createElement('div');
+                        spotElement.className = `parking-spot ${spot.status}`;
+                        spotElement.dataset.id = spot.spot_id;
+                        spotElement.textContent = spot.spot_number;
+                        parkingArea.appendChild(spotElement);
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
         }
         
-        $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', () => {
             fetchParkingData();
             setInterval(fetchParkingData, 5000);
         });
